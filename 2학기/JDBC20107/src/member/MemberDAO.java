@@ -123,11 +123,25 @@ public class MemberDAO {
 		return cnt;
 	}
 	
-	public int updateMember(int num, String name, String id, String password, int birth, String gender, String job, String city) {
+	public int updateMember(int num, String password, int birth, String gender, String job, String city) {
 		int cnt = 0;
 		Connection conn = getConnection();
-		String sql = "UPDATE MEMBER_TBL SET name = ?, id = ?, password = ?, birth = ?, gender = ?, job = ?, city = ? WHERE num = ?";
-		
+		String sql = "UPDATE MEMBER_TBL SET password = ?, birth = ?, gender = ?, job = ?, city = ? WHERE num = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, password);
+			pstmt.setInt(2, birth);
+			pstmt.setString(3, gender);
+			pstmt.setString(4, job);
+			pstmt.setString(5, city);
+			pstmt.setInt(6, num);
+			cnt = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
 		return cnt;
 	}
 }
