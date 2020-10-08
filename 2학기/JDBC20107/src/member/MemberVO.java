@@ -97,5 +97,8 @@ public class MemberVO {
 		this.birth = birth;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "id : "+this.id + " pw : "+this.password;
+	}
 }
