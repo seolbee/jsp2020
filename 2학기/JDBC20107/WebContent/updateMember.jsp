@@ -2,10 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file= "header.jsp"%>
 <%
-	MemberVO vo = instance.getAMember(Integer.parseInt(request.getParameter("num")));
+	MemberVO vo = instance.getAMember(Integer.parseInt(request.getParameter("memno")));
 	System.out.println(vo.toString());
 %>
-	<form action="10updateMemberPro.jsp" method="post">
+	<form action="updateMemberPro.jsp" method="post">
 		<table border="1" style="width:400">
 			<tr>
 				<td colspan="2" align="center"><b>회원 수정 정보 입력</b></td>
@@ -13,7 +13,7 @@
 			<tr>
 				<th>회원번호</th>
 				<td>
-					<input type="text" name="memno" value="<%= vo.getNum() %>" readonly>
+					<input type="text" name="memno" value="<%= vo.getMemno() %>" readonly>
 				</td>
 			</tr>
 			<tr>

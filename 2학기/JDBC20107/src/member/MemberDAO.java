@@ -17,7 +17,7 @@ public class MemberDAO {
 	
 	public Connection getConnection() {
 		String id = "hr";
-		String password = "hr";
+		String password = "1234";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		Connection conn = null;
 		try {
@@ -51,7 +51,7 @@ public class MemberDAO {
 	public ArrayList<MemberVO> selectMembers(){
 		ArrayList<MemberVO> list = null;//sql에 행을 저장하기 위해 MemberVO로 list를 만든다.
 		Connection conn = this.getConnection();//conn 객체 반환
-		String sql = "SELECT * FROM MEMBER_TBL";//table 전체 행을 가져옴.
+		String sql = "SELECT * FROM MEMBER_TBL ORDER BY memno asc";//table 전체 행을 가져옴.
 		PreparedStatement pstmt = null;//preparedstatement 변수를 선언
 		ResultSet rs = null;//ResultSet 변수 선언
 		try {
@@ -61,7 +61,7 @@ public class MemberDAO {
 			
 			while(rs.next()) {//rs.next() 값이 없으면 false, 있으면 true 반환 -> 값이 없을 때까지 계속 돌아감
 				//각 행의 속성값을 가져옴
-				int num = rs.getInt("num");
+				int num = rs.getInt("memno");
 				String name = rs.getString("name");
 				String id = rs.getString("id");
 				String password = rs.getString("pass");
@@ -115,7 +115,7 @@ public class MemberDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);//pstmt 넣어주기
 			//sql ? 에 변수 세팅
-			pstmt.setInt(1, vo.getNum());
+			pstmt.setInt(1, vo.getMemno());
 			pstmt.setString(2, vo.getName());
 			pstmt.setString(3, vo.getId());
 			pstmt.setString(4, vo.getPassword());
@@ -135,7 +135,7 @@ public class MemberDAO {
 	public int updateMember(MemberVO vo) {
 		int cnt = 0;//행 갯수 변수
 		Connection conn = getConnection();//conn 객체 가져오기
-		String sql = "UPDATE MEMBER_TBL SET pass = ?, birth = ?, gender = ?, job = ?, city = ? WHERE num = ?";//Update 쿼리 문
+		String sql = "UPDATE MEMBER_TBL SET pass = ?, birth = ?, gender = ?, job = ?, city = ? WHERE memno = ?";//Update 쿼리 문
 		PreparedStatement pstmt = null;//preparestatement 변수
 		try {
 			pstmt = conn.prepareStatement(sql);//pstmt 넣어주기
@@ -145,7 +145,7 @@ public class MemberDAO {
 			pstmt.setString(3, vo.getGender());
 			pstmt.setString(4, vo.getJob());
 			pstmt.setString(5, vo.getCity());
-			pstmt.setInt(6, vo.getNum());
+			pstmt.setInt(6, vo.getMemno());
 			cnt = pstmt.executeUpdate();//sql문 실행하면서 행 갯수를 반환
 		} catch (Exception e) {
 			e.printStackTrace();//에러 날 시 에러문 내기
@@ -162,7 +162,7 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;//preparedStatement 처음엔 null 값으로 
 		try {
 			pstmt = conn.prepareStatement(sql);//preparedStatement 객체 넣어주기
-			pstmt.setInt(1, vo.getNum());//sql ?에 값 넣어주는 작업
+			pstmt.setInt(1, vo.getMemno());//sql ?에 값 넣어주는 작업
 			cnt = pstmt.executeUpdate();//sql를 실행시키면서 행 갯수 반환
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -194,14 +194,14 @@ public class MemberDAO {
 	public MemberVO getAMember(int num) {
 		MemberVO vo = null;
 		Connection conn = getConnection();
-		String sql = "SELECT * FROM MEMBER_TBL WHERE num = ?";
+		String sql = "SELECT * FROM MEMBER_TBL WHERE memno = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-			if(rs.next()) vo = new MemberVO(rs.getInt("num"), rs.getString("name"), rs.getString("id"), rs.getString("pass"), rs.getInt("birth"), rs.getString("gender"),rs.getString("job"), rs.getString("city"), rs.getDate("joinDate"));
+			if(rs.next()) vo = new MemberVO(rs.getInt("memno"), rs.getString("name"), rs.getString("id"), rs.getString("pass"), rs.getInt("birth"), rs.getString("gender"),rs.getString("job"), rs.getString("city"), rs.getDate("joinDate"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

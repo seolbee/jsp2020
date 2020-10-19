@@ -3,7 +3,7 @@ package member;
 import java.util.Date;
 
 public class MemberVO {
-	int num;
+	int memno;
 	String name;
 	String id;
 	String password;
@@ -13,8 +13,8 @@ public class MemberVO {
 	String city;
 	Date registeDate;
 	
-	public MemberVO(int num, String name, String id, String password, int birth, String gender, String job, String city, Date registeDate) {
-		this.num = num;
+	public MemberVO(int memno, String name, String id, String password, int birth, String gender, String job, String city, Date registeDate) {
+		this.memno = memno;
 		this.name = name;
 		this.id = id;
 		this.password = password;
@@ -25,12 +25,12 @@ public class MemberVO {
 		this.registeDate = registeDate;
 	}
 	
-	public int getNum() {
-		return num;
+	public int getMemno() {
+		return memno;
 	}
 	
-	public void setnum(int num) {
-		this.num = num;
+	public void setMemno(int memno) {
+		this.memno = memno;
 	}
 	
 	public String getName() {
