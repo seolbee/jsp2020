@@ -17,7 +17,7 @@ public class MemberDAO {
 	
 	public Connection getConnection() {
 		String id = "hr";
-		String password = "hr";
+		String password = "1234";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		Connection conn = null;
 		try {
@@ -32,14 +32,14 @@ public class MemberDAO {
 	
 	public int getMaxNo() {
 		Connection conn = getConnection();
-		String sql = "SELECT MAX(num) as num FROM MEMBER_TBL";
+		String sql = "SELECT MAX(memno) as memno FROM MEMBER_TBL";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int no = -1;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			if(rs.next()) no = rs.getInt("num");
+			if(rs.next()) no = rs.getInt("memno");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -158,8 +158,7 @@ public class MemberDAO {
 	public int deletemember(MemberVO vo) {
 		int cnt = 0;//행 개수에 대한 변수
 		Connection conn = getConnection();//conn 객체 가져오기
-		String sql = "SELECT PASSWORD FROM MEMBER_TBL WHERE MEMNO = ?";
-		sql = "DELETE FROM MEMBER_TBL WHERE memno = ?";//delete sql문
+		String sql = "DELETE FROM MEMBER_TBL WHERE memno = ?";//delete sql문
 		PreparedStatement pstmt = null;//preparedStatement 처음엔 null 값으로 
 		try {
 			pstmt = conn.prepareStatement(sql);//preparedStatement 객체 넣어주기
