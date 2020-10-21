@@ -33,7 +33,7 @@
 			<td><%= vo.getJob() %></td>
 			<td><%= vo.getCity() %></td>
 			<td><%= vo.getRegisteDate().toString() %></td>
-			<td><a href="updateMember.jsp?memno=<%=vo.getMemno()%>">탈퇴</a></td>
+			<td><a href="deleteMember.jsp?memno=<%=vo.getMemno()%>">탈퇴</a></td>
 		</tr>
 		<%
 			}
