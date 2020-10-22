@@ -155,7 +155,7 @@ public class MemberDAO {
 		return cnt;//행 갯수 반환하기
 	}
 	
-	public int deletemember(MemberVO vo) {
+	public int deleteMember(MemberVO vo) {
 		int cnt = 0;//행 개수에 대한 변수
 		Connection conn = getConnection();//conn 객체 가져오기
 		String sql = "DELETE FROM MEMBER_TBL WHERE memno = ?";//delete sql문

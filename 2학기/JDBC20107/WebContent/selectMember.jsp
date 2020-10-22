@@ -24,16 +24,16 @@
 			for(MemberVO vo:list){//for문으로 list에 있는 값들 출력하기
 		%>
 		<tr>
-			<td><a href="updateMember.jsp?memno=<%=vo.getMemno()%>"><%=vo.getMemno() %></a></td>
-			<td><%= vo.getName() %></td>
-			<td><%= vo.getId() %></td>
-			<td><%= vo.getPassword() %></td>
-			<td><%= vo.getBirth() %></td>
-			<td><%= vo.getGender().equals("m") ? "남자" : "여자"%></td>
-			<td><%= vo.getJob() %></td>
-			<td><%= vo.getCity() %></td>
-			<td><%= vo.getRegisteDate().toString() %></td>
-			<td><a href="deleteMember.jsp?memno=<%=vo.getMemno()%>">탈퇴</a></td>
+			<td><a href="updateMember.jsp?memno=<%=vo.getMemno()%>"><%=vo.getMemno() %></a></td><!-- updatemember.jsp에 파라미터 memno 값을 전달을 위해 getMemno를 함. 유저 memno를 출력 -->
+			<td><%= vo.getName() %></td><!-- 유저 네임 값 출력 -->
+			<td><%= vo.getId() %></td><!-- 유저 아이디 값 출력 -->
+			<td><%= vo.getPassword() %></td><!-- 유저 패스워드 값 출력 -->
+			<td><%= vo.getBirth() %></td><!-- 유저 생년 값 출력 -->
+			<td><%= vo.getGender().equals("m") ? "남자" : "여자"%></td><!-- 유저 성별 값 출력 -> getGender().equals("m")이 true 라면 남자 아니면 여자 -->
+			<td><%= vo.getJob() %></td><!-- 유저 직업 값 출력 -->
+			<td><%= vo.getCity() %></td><!-- 유저가 사는 지역 값 출력 -->
+			<td><%= vo.getRegisteDate().toString() %></td><!-- 유저가 가입한 날 출력  Date 객체이기 때문에 toString을 해줘야 함. -->
+			<td><a href="deleteMember.jsp?memno=<%=vo.getMemno()%>">탈퇴</a></td><!-- deleteMember.jsp-> 유저 삭제 (삭제를 위해 memno 값을 전달) -->
 		</tr>
 		<%
 			}
