@@ -19,6 +19,6 @@
 %>
 
 <script>
-	alert("회원 수정 성공 row 갯수 : <%= cnt %> ");
+	alert("회원 수정 성공");
 	location.href="selectMember.jsp";
 </script>

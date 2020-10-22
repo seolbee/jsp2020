@@ -17,9 +17,9 @@ CREATE TABLE MEMBER_TBL (
 
 COMMIT
 
-INSERT INTO MEMBER_TBL VALUES(1001, '홍길동', 'HONG1', '1234', 2002, '남자', '학생', '서울', SYSDATE);
-INSERT INTO MEMBER_TBL VALUES(1002, '고길동', 'HONG2', '1234', 2010, '여자', '교사', '성남', SYSDATE);
-INSERT INTO MEMBER_TBL VALUES(1003, '강길동', 'HONG3', '1234', 2009, '남자', '학생', '용인', SYSDATE);
-INSERT INTO MEMBER_TBL VALUES(1004, '장길동', 'HONG4', '1234', 2008, '여자', '가수', '수원', SYSDATE);
+INSERT INTO MEMBER_TBL VALUES(1001, '홍길동', 'HONG1', '1234', 2002, 'm', '학생', '서울', SYSDATE);
+INSERT INTO MEMBER_TBL VALUES(1002, '고길동', 'HONG2', '1234', 2010, 'f', '교사', '성남', SYSDATE);
+INSERT INTO MEMBER_TBL VALUES(1003, '강길동', 'HONG3', '1234', 2009, 'm', '학생', '용인', SYSDATE);
+INSERT INTO MEMBER_TBL VALUES(1004, '장길동', 'HONG4', '1234', 2008, 'f', '가수', '수원', SYSDATE);
 
-INSERT INTO MEMBER_TBL(memno, name, id, pass, birth, gender, job, city, joindate) VALUES(1005, '김길동', 'HONG5', '1234', 2001, '남자','공무원', '용인', SYSDATE);
+INSERT INTO MEMBER_TBL(memno, name, id, pass, birth, gender, job, city, joindate) VALUES(1005, '김길동', 'HONG5', '1234', 2001, 'm','공무원', '용인', SYSDATE);

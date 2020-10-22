@@ -23,6 +23,13 @@
 				</td>
 			</tr>
 			<tr>
+				<th>비밀번호 확인</th>
+				<td>
+					<input type="password" name="confirm_pass">
+					<input type="button" value="비밀번호 확인" onclick="pass_check(this.form.pass, this.form.confirm_pass)">
+				</td>
+			</tr>
+			<tr>
 				<th>생년(4자리)</th>
 				<td>
 					<select name="birth">
@@ -39,8 +46,8 @@
 			<tr>
 				<th>성별</th>
 				<td>
-					<input type="radio" name="gender" value="남자" required>남자
-					<input type="radio" name="gender" value="여자" required>여자
+					<input type="radio" name="gender" value="m" required>남자
+					<input type="radio" name="gender" value="f" required>여자
 				</td>
 			</tr>
 			<tr>
@@ -69,6 +76,16 @@
 			} else {
 				url = "idCheck.jsp?id="+id;
 				window.open(url, "post", "width=400,height=200");
+			}
+		}
+		
+		function pass_check(pass, confirm_pass){
+			if(pass.value !== confirm_pass.value){
+				alert("비밀번호가 틀립니다.");
+				pass.value = "";
+				confirm_pass.value = "";
+			} else {
+				alert("비밀번호가 일치합니다.");
 			}
 		}
 	</script>

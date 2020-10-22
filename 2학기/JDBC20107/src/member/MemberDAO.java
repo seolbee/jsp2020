@@ -16,34 +16,34 @@ public class MemberDAO {
 	}
 	
 	public Connection getConnection() {
-		String id = "hr";
-		String password = "1234";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		Connection conn = null;
+		String id = "hr";//데이터베이스 계정 아이디
+		String password = "hr"; //데이터베이스 계정 비밀번호
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";//데이터베이스 URL
+		Connection conn = null;//Connection 객체
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(url, id, password);
+			Class.forName("oracle.jdbc.driver.OracleDriver");//데이터베이스 드라이버 설정
+			conn = DriverManager.getConnection(url, id, password);//데이터 베이스 연결
 			System.out.println("오라클 접속 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return conn;
+		return conn;//Connection 객체 반환
 	}
 	
 	public int getMaxNo() {
-		Connection conn = getConnection();
-		String sql = "SELECT MAX(memno) as memno FROM MEMBER_TBL";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int no = -1;
+		Connection conn = getConnection();//Connection 객체 가져오기
+		String sql = "SELECT MAX(memno) as memno FROM MEMBER_TBL";//회원 번호 중 가장 큰 번호 찾아서 가져오기
+		PreparedStatement pstmt = null;//preparedStatement 객체 선언
+		ResultSet rs = null;//ResultSet 객체 선언
+		int no = -1;//no변수 선언
 		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if(rs.next()) no = rs.getInt("memno");
+			pstmt = conn.prepareStatement(sql);//preparestatement객체 저장
+			rs = pstmt.executeQuery();//executeQuery로 실행된 결과 rs에 저장
+			if(rs.next()) no = rs.getInt("memno");//rs.next()로 결과 값이 있을 시 rs.getInt("memno")로 no 값 가져오기
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			close(rs, pstmt, conn);
+			close(rs, pstmt, conn);//close 메서드로 객체들 반환
 		}
 		return no;
 	}
@@ -83,27 +83,27 @@ public class MemberDAO {
 	
 	public void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
 		try {
-			if(rs != null) {
-				rs.close();
+			if(rs != null) {//rs 객체가 있는지 체크
+				rs.close();//있으면 반환
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			e.printStackTrace();//에러시 오류로 멈춤
 		}
 		
 		try {
-			if(pstmt != null) {
-				pstmt.close();
+			if(pstmt != null) {//pstmt 객체가 있는지 체크
+				pstmt.close();//있으면 반환
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();//에러시 오류로 멈춤
 		}
 		
 		try {
-			if(conn != null) {
-				conn.close();
+			if(conn != null) {//conn 객체가 있는지 체크
+				conn.close();//있으면 반환
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();//에러시 오류로 멈춤
 		}
 	}
 	
@@ -192,21 +192,24 @@ public class MemberDAO {
 	}
 	
 	public MemberVO getAMember(int num) {
-		MemberVO vo = null;
-		Connection conn = getConnection();
-		String sql = "SELECT * FROM MEMBER_TBL WHERE memno = ?";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		MemberVO vo = null;//찾아낸 값을 저장할 때 사용할 변수
+		Connection conn = getConnection();//connection 객체 가져오기
+		String sql = "SELECT * FROM MEMBER_TBL WHERE memno = ?";//select문 선언
+		PreparedStatement pstmt = null;//preparedStatement 변수 선언
+		ResultSet rs = null;//ResultSet변수 선언
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			rs = pstmt.executeQuery();
-			if(rs.next()) vo = new MemberVO(rs.getInt("memno"), rs.getString("name"), rs.getString("id"), rs.getString("pass"), rs.getInt("birth"), rs.getString("gender"),rs.getString("job"), rs.getString("city"), rs.getDate("joinDate"));
+			pstmt = conn.prepareStatement(sql);//pstmt에 preparestatement 객체 저장
+			pstmt.setInt(1, num);//sql '?' 에 값넣기
+			rs = pstmt.executeQuery();//executeQuery()로 실행된 sql의 결과 값을 rs에 저장
+			if(rs.next()) {//rs.next()로 결과 값이 있는지 체크
+				//있으면 MemberVO 새로 생성해서 vo에 저장
+				vo = new MemberVO(rs.getInt("memno"), rs.getString("name"), rs.getString("id"), rs.getString("pass"), rs.getInt("birth"), rs.getString("gender"),rs.getString("job"), rs.getString("city"), rs.getDate("joinDate"));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			close(rs, pstmt, conn);
+			close(rs, pstmt, conn);//close 메서드로 객체 자원 반환
 		}
-		return vo;
+		return vo;//vo 객체 리턴시켜주기
 	}
 }

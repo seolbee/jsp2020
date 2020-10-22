@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="member.MemberDAO"%>
-<%
-	MemberDAO instance = MemberDAO.getInstance();
-%>
+<%@page import="member.MemberDAO"%><!--  memberDAO import 해주기 -->
+<% MemberDAO instance = MemberDAO.getInstance();//MemberDAO Instance 객체 가져오기%>
 <!DOCTYPE html>
 <html>
 <head>

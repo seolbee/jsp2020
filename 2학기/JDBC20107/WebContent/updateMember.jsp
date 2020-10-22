@@ -51,8 +51,8 @@
 			<tr>
 				<th>성별</th>
 				<td>
-					<input type="radio" name="gender" value="남자" <%= vo.getGender().equals("남자") ? "selected" : "" %>>남자
-					<input type="radio" name="gender" value="여자" <%= vo.getGender().equals("여자") ? "selected" : "" %>>여자
+					<input type="radio" name="gender" value="m" <%= vo.getGender().equals("m") ? "checked" : "" %>>남자
+					<input type="radio" name="gender" value="f" <%= vo.getGender().equals("f") ? "checked" : "" %>>여자
 				</td>
 			</tr>
 			<tr>
@@ -60,7 +60,7 @@
 				<td><input type="text" name="job" value="<%= vo.getJob() %>"></td>
 			</tr>
 			<tr>
-				<th>직업</th>
+				<th>도시</th>
 				<td>
 					<input type="text" name="city" value="<%= vo.getCity() %>">
 				</td>
