@@ -27,7 +27,7 @@ public class BoardDAO {
 				cnt = no;
 			}
 		}
-		return cnt;
+		return cnt+1;
 	}
 	
 	public String getDate() {

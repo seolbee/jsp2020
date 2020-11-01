@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.BoardDAO;
 import board.BoardVO;
-@WebServlet("BoardInsert.do")
+@WebServlet("/BoardInsert.do")
 
 public class BoardInsertController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		doProcess(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		doProcess(req, resp);
 	}
 	
 	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -43,7 +43,6 @@ public class BoardInsertController extends HttpServlet{
 		BoardVO vo = new BoardVO(boardNum, name, password, title, content, writeDate);
 		instance.insertBoard(vo);
 		//화면 출력 -> jsp의 역할(view 역할 -> view 페이지로)
-		RequestDispatcher rd = req.getRequestDispatcher("selectBoard.jsp");
-		rd.forward(req, resp);
+		resp.sendRedirect("BoardList.do");
 	}
 }
