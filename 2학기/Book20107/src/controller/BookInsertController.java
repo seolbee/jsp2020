@@ -27,6 +27,7 @@ public class BookInsertController extends HttpServlet{
 	
 	public void bookInsert(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		int bcode = Integer.parseInt(req.getParameter("bcode"));
 		String btitle = req.getParameter("btitle");
