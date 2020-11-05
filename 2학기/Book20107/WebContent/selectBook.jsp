@@ -5,11 +5,11 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file = "header.jsp" %>
 
 <%
 	ArrayList<BookVO> list = (ArrayList<BookVO>) request.getAttribute("list");
-	DecimalFormat formatter = new  DecimalFormat("###,###");
 %>
 
 <table border=1>
@@ -28,12 +28,28 @@
 		<c:forEach var="book" items="${list}">
 			<tr>
 				<td><a href="updateBook.jsp?bcode=${book.bcode}">${book.bcode}</a></td>
-				<td>${book.title}</td>
+				<td>${book.btitle}</td>
 				<td>${book.bwriter}</td>
-				<td>${book.bpub }</td>
-				<td>${formatter.format(book.bprice)}</td>
-				<td>${book.bdate}</td>
-				<td><a href="deleteBook.jsp?bcode=${book.bcode}">${book.bcode }</a></td>
+				<td>
+					<c:set var="bpub" value="${book.bpub}"/>
+					<c:choose>
+						<c:when test="${bpub == 1001}">
+							양영디지털
+						</c:when>
+						<c:when test="${bpub == 1002}">
+							북스미디어
+						</c:when>
+						<c:when test="${bpub == 1003 }">
+							한빛아카데미
+						</c:when>
+						<c:when test="${bpub == 1004}">
+							이지스
+						</c:when>
+					</c:choose>
+				</td>
+				<td><fmt:formatNumber value="${book.bprice}" groupingUsed="true"/></td>
+				<td><fmt:formatDate value="${book.bdate}" pattern="yyyy년 MM월 dd일"/></td>
+				<td><a href="deleteBook.jsp?bcode=${book.bcode}">삭제</a></td>
 			</tr>
 		</c:forEach>
 	</tbody>

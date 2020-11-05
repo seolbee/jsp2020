@@ -1,9 +1,9 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +30,9 @@ public class BooklListController extends HttpServlet{
 	public void getList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		BookDAO instance = BookDAO.getInstance();
 		ArrayList<BookVO> list = instance.getList();
+		req.setAttribute("list", list);
 		
+		RequestDispatcher rd = req.getRequestDispatcher("selectBook.jsp");
+		rd.forward(req, res);
 	}
 }

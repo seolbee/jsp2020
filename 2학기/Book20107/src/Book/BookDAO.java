@@ -37,8 +37,7 @@ public class BookDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
-			no = rs.getInt("bcode");
+			if(rs.next()) no = rs.getInt("bcode");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -46,7 +45,7 @@ public class BookDAO {
 			close(pstmt);
 			close(conn);
 		}
-		return no;
+		return ++no;
 	}
 	
 	public void close(ResultSet rs) {
@@ -63,7 +62,7 @@ public class BookDAO {
 	
 	public ArrayList<BookVO> getList(){
 		ArrayList<BookVO> list = new ArrayList<BookVO>();
-		String sql = "SELECT * FROM BOOK_TBL";
+		String sql = "SELECT * FROM BOOK_TBL ORDER BY BCODE ASC";
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
