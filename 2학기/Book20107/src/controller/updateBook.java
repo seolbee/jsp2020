@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import Book.BookDAO;
 import Book.BookVO;
 
-@WebServlet("updateBook.do")
+@WebServlet("/updateBook.do")
 
 public class updateBook extends HttpServlet{
 	@Override
@@ -33,7 +33,7 @@ public class updateBook extends HttpServlet{
 		int bcode = Integer.parseInt(req.getParameter("bcode"));
 		BookDAO instance = BookDAO.getInstance();
 		BookVO vo = instance.searchBook(bcode);
-		RequestDispatcher rd = req.getRequestDispatcher("insertBook?type='update'.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("insertBook.jsp?type=update");
 		req.setAttribute("book", vo);
 		rd.forward(req, res);
 	}

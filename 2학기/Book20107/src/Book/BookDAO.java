@@ -18,7 +18,7 @@ public class BookDAO {
 	public Connection getConnection() {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "hr";
-		String password = "hr";
+		String password = "1234";
 		Connection conn = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -116,7 +116,7 @@ public class BookDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bcode);
 			rs = pstmt.executeQuery();
-			if(!rs.next()) vo = new BookVO(rs.getInt("bcode"), rs.getString("btitle"), rs.getString("bwriter"), rs.getInt("bpub"), rs.getInt("bprice"), rs.getDate("bdate"));
+			if(rs.next()) vo = new BookVO(rs.getInt("bcode"), rs.getString("btitle"), rs.getString("bwriter"), rs.getInt("bpub"), rs.getInt("bprice"), rs.getDate("bdate"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

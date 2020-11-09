@@ -2,10 +2,17 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Book.BookDAO;
+import Book.BookVO;
+
+@WebServlet("/insertBook.do")
 
 public class InsertBook extends HttpServlet{
 	@Override
@@ -19,6 +26,13 @@ public class InsertBook extends HttpServlet{
 	}
 	
 	public void insertBook(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-		
+		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=utf-8;");
+		BookDAO instance = BookDAO.getInstance();
+		int bcode = instance.getMaxNo();
+		BookVO vo = new BookVO(bcode, "", "", -1, -1, null);
+		req.setAttribute("book", vo);
+		RequestDispatcher rd = req.getRequestDispatcher("insertBook.jsp?type=insert");
+		rd.forward(req, res);
 	}
 }

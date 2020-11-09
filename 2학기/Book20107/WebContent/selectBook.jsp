@@ -4,8 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file = "header.jsp" %>
 
 <%
@@ -27,7 +25,7 @@
 	<tbody>
 		<c:forEach var="book" items="${list}">
 			<tr>
-				<td><a href="updateBook.jsp?bcode=${book.bcode}">${book.bcode}</a></td>
+				<td><a href="updateBook.do?bcode=${book.bcode}">${book.bcode}</a></td>
 				<td>${book.btitle}</td>
 				<td>${book.bwriter}</td>
 				<td>
