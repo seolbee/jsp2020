@@ -37,7 +37,7 @@ public class BookUpdateController extends HttpServlet{
 		
 		BookDAO instance = BookDAO.getInstance();
 		int cnt = instance.updateBook(bcode, btitle, bwriter, bpub, bprice, bdate);
-		if(cnt > 0) instance.sendMsg(out, "도서 정보 수정 완료", "selectBook.do");
+		if(cnt > 0) instance.sendMsg(out, "도서정보수정이 완료되었습니다.", "selectBook.do");
 		else instance.errorMsg(out, "도서 정보 수정 실패");
 	}
 }

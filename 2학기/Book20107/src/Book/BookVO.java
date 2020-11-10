@@ -66,5 +66,11 @@ public class BookVO {
 	public void setBdate(Date bdate) {
 		this.bdate = bdate;
 	}
+
+	@Override
+	public String toString() {
+		return "BookVO [bcode=" + bcode + ", btitle=" + btitle + ", bwriter=" + bwriter + ", bpub=" + bpub + ", bprice="
+				+ bprice + ", bdate=" + bdate + "]";
+	}
 	
 }
