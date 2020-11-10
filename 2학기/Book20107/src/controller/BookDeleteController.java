@@ -11,33 +11,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import Book.BookDAO;
 
-@WebServlet("/EditBook.do")
+@WebServlet("/deleteBook.do")
 
-public class BookUpdateController extends HttpServlet{
+public class BookDeleteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		editBook(req, resp);
+		deleteBook(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		editBook(req, resp);
+		deleteBook(req, resp);
 	}
 	
-	public void editBook(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+	public void deleteBook(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		int bcode = Integer.parseInt(req.getParameter("bcode"));
-		String btitle = req.getParameter("btitle");
-		String bwriter = req.getParameter("bwriter");
-		int bpub = Integer.parseInt(req.getParameter("bpub"));
-		int bprice = Integer.parseInt(req.getParameter("bprice"));
-		String bdate = req.getParameter("bdate");
-		
 		BookDAO instance = BookDAO.getInstance();
-		int cnt = instance.updateBook(bcode, btitle, bwriter, bpub, bprice, bdate);
-		if(cnt > 0) instance.sendMsg(out, "도서 정보 수정 완료", "selectBook.do");
-		else instance.errorMsg(out, "도서 정보 수정 실패");
+		int cnt = instance.deleteBook(bcode);
+		if(cnt > 0) instance.sendMsg(out, "도서 삭제 완료", "selectBook.do");
+		else instance.errorMsg(out, "도서 삭제 실패 ");
 	}
 }

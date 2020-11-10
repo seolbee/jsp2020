@@ -15,7 +15,7 @@ import Book.BookVO;
 
 @WebServlet("/selectBook.do")
 
-public class BooklListController extends HttpServlet{
+public class BookListController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

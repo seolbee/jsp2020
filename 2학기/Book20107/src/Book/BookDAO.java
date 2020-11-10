@@ -18,7 +18,7 @@ public class BookDAO {
 	public Connection getConnection() {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "hr";
-		String password = "1234";
+		String password = "hr";
 		Connection conn = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -125,6 +125,42 @@ public class BookDAO {
 			close(conn);
 		}
 		return vo;
+	}
+	
+	public int updateBook(int bcode, String btitle, String bwriter, int bpub, int bprice, String bdate) {
+		int cnt = 0;
+		String sql = "UPDATE BOOK_TBL SET btitle = ?, bwriter = ?, bpub = ?, bprice = ?, bdate = ? WHERE bcode = ?";
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		Date date = Date.valueOf(bdate);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, btitle);
+			pstmt.setString(2, bwriter);
+			pstmt.setInt(3, bpub);
+			pstmt.setInt(4, bprice);
+			pstmt.setDate(5, date);
+			pstmt.setInt(6, bcode);
+			cnt = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+	
+	public int deleteBook(int bcode) {
+		int cnt = 0;
+		String sql = "DELETE FROM BOOK_TBL WHERE bcode = ?";
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bcode);
+			cnt = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
 	}
 	
 	public void sendMsg(PrintWriter out, String msg, String url) {
