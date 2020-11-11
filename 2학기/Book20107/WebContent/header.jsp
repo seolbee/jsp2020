@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>간단한 도서 등록 프로젝트 Ver 1.0</h1>
-	<hr>
+	<h1>간단한 도서 등록 프로젝트 Ver 1.0</h1><hr>
 	<a href="insertBook.do">도서등록</a>
 	<a href="selectBook.do">도서목록조회/수정</a>
 	<a href="index.jsp">홈으로</a>
-	<br>
-	<br>
+	<br><br>
