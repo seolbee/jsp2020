@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BookDAO {
@@ -16,7 +17,7 @@ public class BookDAO {
 	}
 	
 	public Connection getConnection() {//Connection을 생성하는 매서드
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";//db주소
+		String url = "jdbc:oracle:thin:@localhost:1521:XE";//db주소
 		String user = "hr";//db username
 		String password = "hr"; // db password
 		Connection conn = null;// connection 변수
@@ -25,8 +26,6 @@ public class BookDAO {
 			conn = DriverManager.getConnection(url, user, password); // DriverManager.getConnection으로 Connection 객체 생성
 		} catch (Exception e) {// try에서 오류가 날 시 바로 이 안에 구문을 실행
 			e.printStackTrace();//오류나면 에러 항목 출력
-		} finally {//try와 catch문을 모두 거치고 나서 실행
-			close(conn);
 		}
 		return conn;//객체 반환
 	}
@@ -43,11 +42,6 @@ public class BookDAO {
 			if(rs.next()) no = rs.getInt("bcode");//rs.next()가 있으면 rs.getInt()로 제일 큰 bcode를 no에 넣어줌
 		} catch (Exception e) {// try에서 오류가 날 시 바로 이 안에 구문을 실행
 			e.printStackTrace();//오류나면 에러 항목 출력
-		} finally {//try와 catch문을 모두 거치고 나서 실행
-			close(rs);
-			close(pstmt);
-			close(conn);
-			//객체 자원 반환
 		}
 		return ++no;//제일 큰 bcode에 ++no 한 값 (다음 bcode)을 return
 	}
@@ -55,20 +49,20 @@ public class BookDAO {
 	//close 매서드: 썼던 객체의 자원 반환
 	//오버로드를 이용해서 Connection, PreparedStatment, ResultSet 객체의 close를 반환함 (이유 : 반환 코드는 같지만 반환해주는 변수의 타입 형이 다르기 때문에 오버로드를 사용하여 같은 코드에 다른 변수들을 넣을 수 있게 함)
 	public void close(ResultSet rs) {
-		try {if(rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();}
+		try {if(rs != null) rs.close(); } catch (SQLException e) {e.printStackTrace();}
 	}
 	
 	public void close(PreparedStatement pstmt) {
-		try {if(pstmt != null) pstmt.close();} catch (Exception e) {e.printStackTrace();}
+		try {if(pstmt != null) pstmt.close();} catch (SQLException e) {e.printStackTrace();}
 	}
 	
 	public void close(Connection conn) {
-		try {if(conn != null) conn.close();} catch (Exception e) {e.printStackTrace();}
+		try {if(conn != null) conn.close();} catch (SQLException e) {e.printStackTrace();}
 	}
 	
 	public ArrayList<BookVO> getList(){//BOOK_TBL의 전체 컬럼 값을 가져오는 매서드 selectBook.jsp에 쓰이는 거
 		ArrayList<BookVO> list = new ArrayList<BookVO>();//BookVO형 변수만 들어가는 ArrayList 변수 선언과 대입
-		String sql = "SELECT * FROM BOOK_TBL ORDER BY BCODE ASC";//BOOK_TBL의 전체 컬럼 값을 가져오는 sql문
+		String sql = "SELECT * FROM BOOK_TBL ORDER BY BCODE ASC";//BOOK_TBL의 전체 컬럼 값을 가져오는
 		Connection conn = getConnection();//Connection 변수 선언과 getConnection()으로 Connection 객체를 생성하여 반환 시켜 대입
 		PreparedStatement pstmt = null;//PreparedStatement 객체 선언 초기 값 null
 		ResultSet rs = null;//ResultSet 변수 선언 초기 값은 null
@@ -81,11 +75,6 @@ public class BookDAO {
 			}
 		} catch (Exception e) {// try에서 오류가 날 시 바로 이 안에 구문을 실행
 			e.printStackTrace();//오류시 에러 항목 출력
-		} finally {//try와 catch문을 모두 거치고 나서 실행
-			close(rs);
-			close(pstmt);
-			close(conn);
-			//썼던 객체 자원 반환
 		}
 		return list;//만들어진 list를 리턴
 	}
