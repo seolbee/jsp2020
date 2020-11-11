@@ -46,7 +46,7 @@
 			<% if(request.getParameter("type").equals("insert")){ %><!-- request.getParameter("type")이 insert일 경우 (도서 등록 경우)  -->
 				<input type="reset" value="재작성" /></td><!-- input type=reset 으로 재작성 만들기 -->
 			<% } else { %>
-				<button onclick="location.href='selectBook.do'">취소</button><!-- 취소 버튼 만들기 누르면 selectBook페이지로 감 -->
+				<button type="button" onclick="location.href='selectBook.do'">취소</button><!-- 취소 버튼 만들기 누르면 selectBook페이지로 감 -->
 			<%} %>
 		</tr>
 	</table>

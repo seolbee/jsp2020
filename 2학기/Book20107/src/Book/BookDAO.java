@@ -17,7 +17,7 @@ public class BookDAO {
 	}
 	
 	public Connection getConnection() {//Connection을 생성하는 매서드
-		String url = "jdbc:oracle:thin:@localhost:1521:XE";//db주소
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";//db주소
 		String user = "hr";//db username
 		String password = "hr"; // db password
 		Connection conn = null;// connection 변수
