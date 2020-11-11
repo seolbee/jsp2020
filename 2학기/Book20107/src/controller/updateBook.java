@@ -27,7 +27,7 @@ public class updateBook extends HttpServlet{//서블릿으로 만들어주기 �
 		updateBook(req, resp);//post전송 방식으로 updateBook.do로 요청이 온다면 updateBook() 매서드를 실행
 	}
 	
-	public void updateBook(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{//
+	public void updateBook(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=utf-8;");
 		int bcode = Integer.parseInt(req.getParameter("bcode"));
