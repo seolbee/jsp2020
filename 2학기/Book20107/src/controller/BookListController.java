@@ -27,12 +27,12 @@ public class BookListController extends HttpServlet{//서블릿으로 만들어�
 		getList(req, resp);//post방식으로 selectBook.do요청이 온다면 getList 매서드를 실행 
 	}
 	
-	public void getList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-		BookDAO instance = BookDAO.getInstance();
-		ArrayList<BookVO> list = instance.getList();
-		req.setAttribute("list", list);
+	public void getList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{//BOOK_TBL의 전체 튜플 값을 가져오는 매서드
+		BookDAO instance = BookDAO.getInstance();//BookDAO에 instance를 BookDAO instance에 가져온다.
+		ArrayList<BookVO> list = instance.getList();//BookDAO에 getList()로 전체 book_tbl 값들을 ArrayList 형으로 받는다.
+		req.setAttribute("list", list);//session에 list를 넣는다.
 		
-		RequestDispatcher rd = req.getRequestDispatcher("selectBook.jsp");
-		rd.forward(req, res);
+		RequestDispatcher rd = req.getRequestDispatcher("selectBook.jsp");//RequestDispatcher 변수 만들기 나중에 selectBook.jsp로 forward 시켜주기 위해서
+		rd.forward(req, res);//forward 시켜줌 (HttpServletRequest, HttpServletResponse)를 파라매터로 넣는다.
 	}
 }

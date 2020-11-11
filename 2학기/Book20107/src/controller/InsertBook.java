@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import Book.BookDAO;
 import Book.BookVO;
 
-@WebServlet("/insertBook.do")
+@WebServlet("/insertBook.do")//어노테이션으로 insertBook.do로 서블릿 매핑을 시켜준다.
 
-public class InsertBook extends HttpServlet{
+public class InsertBook extends HttpServlet{//서블릿으로 만들기 위해서 HttpServlet클래스를 상속받는다.
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {//get방식 요청
 		insertBook(req, resp);
 	}
 	

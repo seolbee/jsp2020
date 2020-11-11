@@ -16,12 +16,12 @@ import Book.BookDAO;
 public class BookInsertController extends HttpServlet{//서블릿으로 만들기 위해 HttpServlet을 상속
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {//get 요청들을 처리하는 매서드
-		bookInsert(req, resp);//get요청으로 AddBook.do가 왔을 때 bookInsert 매서드 실행
+		bookInsert(req, resp);//get방식으로 AddBook.do 요청이 왔을 때 bookInsert 매서드 실행
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {//post 요청들을 처리하는 매서드
-		bookInsert(req, resp);//post요청으로 AddBook.do가 왔을 때 bookInsert 매서드 실행
+		bookInsert(req, resp);//post방식으로 AddBook.do가 왔을 때 bookInsert 매서드 실행
 	}
 	
 	
@@ -37,7 +37,7 @@ public class BookInsertController extends HttpServlet{//서블릿으로 만들�
 		String bdate = req.getParameter("bdate");//req.getParameter()로 bdate 대입하기
 		BookDAO instance = BookDAO.getInstance();//BookDAO instance 변수 생성
 		int cnt = instance.insertBook(bcode, btitle, bwriter, bpub, bprice, bdate);//BookDAO에 insertBook()매서드 실행, 실행시 반환되는 값은 BOOK_TBL에 추가된 튜플의 갯수
-		if(cnt > 0) instance.sendMsg(out, "도서 등록 성공", "selectBook.do");// cnt가 0보다 클 경우 -> BOOK_TBL에 추가된 튜플이 있다. -> 추가가 되었다. -> 성공 메시지 출력
-		else instance.errorMsg(out, "도서 등록 실패"); // cnt 0과 같거나 작을 경우 -> BOOK_TBL에 추가된 컬럼이 없다. -> 추가가 안 되었다. -> 실패 메시지 출력
+		if(cnt > 0) instance.sendMsg(out, "도서 등록 성공", "selectBook.do");// cnt가 0보다 클 경우 -> BOOK_TBL에 추가된 튜플이 있다. -> 추가가 되었다. -> 성공 메시지 출력 다음 페이지로 이동
+		else instance.errorMsg(out, "도서 등록 실패"); // cnt 0과 같거나 작을 경우 -> BOOK_TBL에 추가된 컬럼이 없다. -> 추가가 안 되었다. -> 실패 메시지 출력 이전 페이지로 이동
 	}
 }
