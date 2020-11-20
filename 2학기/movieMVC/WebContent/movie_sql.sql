@@ -1,3 +1,5 @@
+DROP TABLE member;
+
 CREATE TABLE movie(
 	movieNo number primary key, -- 영화 번호
 	movieName VARCHAR2(20), -- 영화  제목
@@ -62,3 +64,10 @@ insert into room values(1,1,1);
 --티켓이 insert 될 때마다 seatCnt(예매한 좌석수 ) 갯수도 증가해야한다
  
 update room set seatCnt = seatCnt +1 where schNo = 1; 
+
+SELECT movieName, category, img, mt.runtime, info, roomNo, schNo, runDay from movie mt, schedule st where mt.movieNo = st.movieNo and mt.movieNo = 10000;
+
+SELECT schno, movieName, decode(category, 01 '액션', 02, '로맨스', 03, '코미디', 04, '스릴러', '애니메이션'), m.runtime, img, info, to_char(runday, 'mm/dd') as 상영시간, roomno FROM movie m, schedule s WHERE m.movieNo = s.movieNo AND m.movieNo = 10000;
+
+--영화 날짜, 상영관 넘버, 상영시간, 좌석번호
+SELECT movieNo, roomNo, runDay, bookDate, seatNo, id from ticket tt, schedule st WHERE tt.schno = st.schno and st.movieNo = 10000;
