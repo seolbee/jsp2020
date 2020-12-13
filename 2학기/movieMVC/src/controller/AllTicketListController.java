@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -10,37 +9,41 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import movie.MovieDAO;
 import movie.MovieVO;
+import movie.TicketVO;
 
-@WebServlet("/movieList.do")
+@WebServlet("/AllTicketList.do")
 
-public class movieListController extends HttpServlet{
+public class AllTicketListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		getMovieList(req, resp);
+		allTicketList(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		getMovieList(req, resp);
+		allTicketList(req, resp);
 	}
 	
-	public void getMovieList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public void allTicketList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		req.setCharacterEncoding("utf-8");
-		res.setContentType("text/html; charset=utf-8");
-		PrintWriter out = res.getWriter();
+		res.setContentType("text/html; charset=utf-8;");
+		
 		MovieDAO instance = MovieDAO.getInstance();
 		
-		int type = 0;
-		if(req.getParameter("type") != null) type = Integer.parseInt(req.getParameter("type"));
+		ArrayList<MovieVO> MovieList = instance.getMovieList(0);
+		ArrayList<ArrayList<TicketVO>> AllTicketList = new ArrayList<>();
+		MovieList.forEach(x-> {
+			ArrayList<TicketVO> list = instance.getAllTicketList(x.getNo());
+			AllTicketList.add(list);
+		});
 		
-		ArrayList<MovieVO> list = instance.getMovieList(type);
+		req.setAttribute("AllTicketList", AllTicketList);
 		
-		req.setAttribute("movieList", list);
-		RequestDispatcher rd = req.getRequestDispatcher("movieList.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("AllTicketList.jsp");
+		
 		rd.forward(req, res);
 	}
 }
